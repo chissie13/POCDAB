@@ -1,2 +1,0 @@
-this test will show that a file can be sent while the contents of this
-file are actually over 59 long :)
