@@ -20,7 +20,7 @@ pkg-config
 
 ## Building
 
-$ git clone https://github.com/daanneek/POCDAB.git
+$ git clone https://github.com/chissie13/POCDAB.git
 
 The resulting binaries can be found in `<build-directory>/products/Release/bin`
 
@@ -35,7 +35,7 @@ the DAB packet address. Thus you need to make sure to pass `10.0.0.1` and
 Running the receiver requires an SDR device compatible with **librtlsdr**.
 The receiver requires **root** access to create the virtual network device:
 ```
-$ sudo <build-directory>/products/Release/bin/receiver 10.0.0.1 1000 5A
+$ sudo <build-directory>/products/Release/bin/receiver 10.0.0.1 1000 7D
 ```
 
 ### Receiving data
@@ -43,5 +43,5 @@ On the machine that is running the receiver, you will simply listen on the addre
 interface for UDP datagrams on the port specified in the packager
 (default 4242):
 ```
-$ nc -u -l 10.0.0.1 4242
+$ python receive.py
 ```
