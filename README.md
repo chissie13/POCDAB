@@ -19,9 +19,11 @@ libtins-dev
 pkg-config
 
 ## Building
-
+```
 $ git clone https://github.com/chissie13/POCDAB.git
-
+$ cd POCDAB
+$ ./build.sh
+```
 The resulting binaries can be found in `<build-directory>/products/Release/bin`
 
 ## Running
@@ -35,7 +37,7 @@ the DAB packet address. Thus you need to make sure to pass `10.0.0.1` and
 Running the receiver requires an SDR device compatible with **librtlsdr**.
 The receiver requires **root** access to create the virtual network device:
 ```
-$ sudo <build-directory>/products/Release/bin/receiver 10.0.0.1 1000 7D
+$ ./run.sh
 ```
 
 ### Receiving data
