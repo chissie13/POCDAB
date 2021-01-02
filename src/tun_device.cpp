@@ -1,3 +1,5 @@
+//this document was not written by me, but was taken from www.github.com/Opendigitalradio/data-over-dab-example
+
 #include "tun_device.h"
 #include <asio/write.hpp>
 #include <iostream>

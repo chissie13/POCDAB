@@ -22,6 +22,7 @@ int main(int argc, char **argv)
   {
    using namespace dab::literals;
 
+//ensemblename tied to the frequency
   std::map<std::string,dab::frequency> mapOfMarks = {
     {"5A", 174928_kHz},{"5B", 176640_kHz},{"5C", 178352_kHz},{"5D", 180064_kHz},
     {"6A", 181936_kHz},{"6B", 183648_kHz},{"6C", 185360_kHz},{"6D", 187072_kHz},
@@ -92,7 +93,7 @@ int main(int argc, char **argv)
 
   // Prepare our packet parser
   auto packetParser = dab::packet_parser{std::uint16_t(std::stoi(argv[2]))};
-
+  auto amountofemptypackets = 0;
   // Get the ensemble ready
   while(!ensemble && ensemble.update());
 
@@ -134,9 +135,16 @@ int main(int argc, char **argv)
                 }
               }
             else if(parseResult.first != dab::parse_status::incomplete)
-              {  
+              {
+		auto packetError = std::uint32_t(parseResult.first);
+		if(packetError == 1){
+			amountofemptypackets = amountofemptypackets + 1;
+			std::cout << "packet received, but there was no data in it: " << amountofemptypackets << '\n';
+		}
+		else{
               std::cout << "packetError: " << std::uint32_t(parseResult.first) << '\n';
               std::cout << std::endl;
+		}
               }
             });
           activated = true;
