@@ -10,6 +10,7 @@ print("start")
 cumData = ""
 while True:
 	data, addr = sock.recvfrom(4096)	#receive data
+	data = data.decode('utf-8')
 	cumData += data				#gather the data and make one long string out of it
 	print("Received data: " + data)
 	if(cumData.count('|') >= 2):		#if the string contains 2 or more special tokens
