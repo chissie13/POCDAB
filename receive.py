@@ -17,12 +17,11 @@ list = [] #list for current transmission
 megaList = [] #list to store previous incomplete transmissions
 packetCounter = 0 #counter for current transmission
 inTransmission = False #is a file mid transmission?
-
-def checkChecksum(string, givenChecksum):
 '''
 creates a checksum from the given string
 checks if the checksum is the same as the given one
 '''
+def checkChecksum(string, givenChecksum):
 	string = string.encode()
 	bytes = array.array('b', string)
 	checksum = 0
@@ -33,12 +32,11 @@ checks if the checksum is the same as the given one
 	if(checksum[2:] == givenChecksum):
 		return True
 	return False
-
+'''
+checks if there is an empty listvalue in the first [packetcounter]
+amount of values in the list
+'''
 def verifyFile(list, packetCounter):
-'''
-checks if there is an empty arrayvalue in the first [packetcounter]
-amount of values in the array
-'''
 	for x in range(packetCounter):
 		if(list[x] == ''):
 			print('file not complete, some packets went missing\n')
@@ -74,7 +72,7 @@ while True: #keep receiving information
 		list[packetCounter] = data	#replace the previously known data with the new one to hopefully add to previously lost data
 	else:
 		list.append(data)		#else just add the newly aquired data to the end of the list
-	if(packetNumber != 0 and '|' in data):	#if its the last package of the transmission
+	if((packetNumber != 0 and '|' in data) or data.count('|') == 2):	#if its the last package of the transmission
 		if(verifyFile(list, packetCounter)):	#check if there is no empty data in the list
 			string = ''.join(list)		#create string from the list
 			fileData = string.split('|')	#get filedata (filename, filedata + checksum)
